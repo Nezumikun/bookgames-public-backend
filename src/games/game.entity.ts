@@ -30,14 +30,16 @@ export class Game {
   @Column({
     type: "varchar",
     name: "GoogleDocID",
-    length: 250
+    length: 250,
+    select: false
   })
   googleDocID: string;
 
   @Column({
     type: "varchar",
     name: "ImapSearch",
-    length: 250
+    length: 250,
+    select: false
   })
   imapSearch: string;
 
@@ -45,7 +47,8 @@ export class Game {
     type: "enum",
     name: "IsActive",
     enum: YesNo,
-    default: YesNo.NO
+    default: YesNo.NO,
+    select: false
   })
   isActive: YesNo;
 
@@ -87,6 +90,8 @@ export class Game {
   })
   countTeam: number;
 
-  @OneToMany(type => Question, question => question.game)
+  @OneToMany(type => Question, question => question.game, {
+    eager: true
+  })
   questions: Question[];
 }
